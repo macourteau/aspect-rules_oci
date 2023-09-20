@@ -1,0 +1,20 @@
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("//:container.bzl", "nodejs_container")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+
+npm_link_all_packages(name = "node_modules")
+
+js_binary(
+    name = "my_app",
+    data = ["//:node_modules/cowsay"],
+    entry_point = "app.js",
+)
+
+nodejs_container(
+    name = "app",
+    binary = ":my_app",
+    cmd = ["/app/app"],
+    image_name = "my-app",
+    registry = "registry.example.com",
+    tag_latest = False,
+)
