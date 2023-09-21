@@ -13,7 +13,7 @@ js_binary(
 nodejs_container(
     name = "app",
     binary = ":my_app",
-    cmd = ["/app/app"],
+    cmd = ["/app/my_app"],
     image_name = "my-app",
     registry = "registry.example.com",
     tag_latest = False,
