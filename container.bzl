@@ -91,16 +91,6 @@ def nodejs_container(
         visibility = visibility,
     )
 
-    oci_tarball(
-        name = "package_%s" % name,
-        image = select({
-            "@platforms//cpu:arm64": ":%s-image_arm64" % name,
-            "@platforms//cpu:x86_64": ":%s-image_amd64" % name,
-        }),
-        repo_tags = [image_name + ":latest"],
-        visibility = visibility,
-    )
-
     oci_push(
         name = "push_%s" % name,
         image = ":%s" % name,
